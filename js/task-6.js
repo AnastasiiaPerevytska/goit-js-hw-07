@@ -10,8 +10,7 @@ const createDiv = document.querySelector("#controls");
 createDiv.classList.add("create-form");
 
 function createBoxes(amount) {
-  const boxesDiv = document.querySelector("#boxes");
-  const boxes = [];
+  const boxesFragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i += 1) {
     const box = document.createElement("div");
     const size = 30 + i * 10;
@@ -19,9 +18,10 @@ function createBoxes(amount) {
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
     box.classList.add("box");
-    boxes.push(box);
+    boxesFragment.appendChild(box);
   }
-  boxesDiv.append(...boxes);
+  boxesDiv.innerHTML = "";
+  boxesDiv.appendChild(boxesFragment);
 }
 
 function destroyBoxes() {
@@ -47,4 +47,3 @@ createButton.addEventListener("click", () => {
 });
 
 destroyButton.addEventListener("click", destroyBoxes);
-  
